@@ -11,43 +11,42 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  email String @unique
-  name String
-  password String
-  activity Activity[]
+  id               String            @id @default(uuid()) @db.VarChar(255)
+  email            String            @unique @db.VarChar(255)
+  name             String            @db.VarChar(255)
+  password         String            @db.VarChar(255)
+  activity         Activity[]
   history_activity HistoryActivity[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at       DateTime          @default(now())
+  updated_at       DateTime          @updatedAt
 
   @@map("users")
 }
 
 model Activity {
-  id Int @id @default(autoincrement())
-  title String
+  id          Int        @id @default(autoincrement())
+  title       String     @db.VarChar(255)
   description String
-  date DateTime
-  time Unsupported("time")
-  repetition Repetition
-  priority Priority
-  user User @relation(fields: [user_id], references: [id])
-  user_id String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  date        DateTime
+  repetition  Repetition
+  priority    Priority
+  user        User       @relation(fields: [user_id], references: [id])
+  user_id     String     @db.VarChar(255)
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
 
   @@map("activities")
 }
 
 model HistoryActivity {
-  id Int @id @default(autoincrement())
-  title String
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
   description String
-  date DateTime
-  user User @relation(fields: [user_id], references: [id])
-  user_id String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  date        DateTime
+  user        User     @relation(fields: [user_id], references: [id])
+  user_id     String   @db.VarChar(255)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   @@map("history_activities")
 }
@@ -60,6 +59,6 @@ enum Repetition {
 }
 
 enum Priority {
-  none 
+  none
   important
 }
