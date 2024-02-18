@@ -11,12 +11,12 @@ app.get('/', async (req: Request, res: Response) => {
       data: {
         name: 'Bayu Maulana',
         email: 'bayumaulana@example.com',
-        password: 'bayumaulana',
+        password: password,
       },
     });
     res.status(404).send(user);
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send({ message: 'Something went wrong', error });
   }
 });
 
